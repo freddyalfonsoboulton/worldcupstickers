@@ -158,6 +158,8 @@ class Economy(object):
         did_not_trade =  set(self.members).difference(have_traded)
         for person_id in did_not_trade:
             person = self.members[person_id]
+            if person.is_finished:
+                continue
             person.buy_pack(stickers_per_pack=self.stickers_per_pack)
             person.finished()
             self.update_member(person_id, person)
